@@ -74,7 +74,8 @@ module.exports = {
     devServer: {
       contentBase: './dist',
       historyApiFallback: true,
-      hot: true
+      hot: true,
+      overlay: true,
     },
 
     plugins: [
