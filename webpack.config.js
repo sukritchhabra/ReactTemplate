@@ -15,6 +15,10 @@ module.exports = {
       'react-hot-loader/patch',
       './src/index.jsx'
     ],
+    reduxtest: [
+      'react-hot-loader/patch',
+      './src/reduxtest.jsx'
+    ],
   },
 
   output: {
@@ -86,7 +90,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       inject: false,
-      chunks: ['app'],
+      chunks: ['app', 'reduxtest'],
       template: require('html-webpack-template'),
       appMountId: 'content'
     }),
