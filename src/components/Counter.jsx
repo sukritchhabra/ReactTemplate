@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import SampleActions from 'state/sample';
+import SampleActions, { selectValue } from 'state/sample';
 import 'styles/Counter.scss';
 
 // A basic counter component connected to the redux store.
@@ -25,7 +25,7 @@ Counter.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    value: state.sample.sampleValue,
+    value: selectValue(state),
   };
 };
 

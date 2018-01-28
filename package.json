@@ -38,6 +38,8 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "reduxsauce": "^0.7.0",
+    "reselect": "^3.0.1",
+    "seamless-immutable": "^7.1.2",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
