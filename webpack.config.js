@@ -15,10 +15,6 @@ module.exports = {
       'react-hot-loader/patch',
       './src/index.jsx'
     ],
-    reduxtest: [
-      'react-hot-loader/patch',
-      './src/reduxtest.jsx'
-    ],
   },
 
   output: {
@@ -71,6 +67,7 @@ module.exports = {
   resolve: {
     alias: {
       components: path.resolve(__dirname, 'src/components'),
+      state: path.resolve(__dirname, 'src/state'),
       styles: path.resolve(__dirname, 'src/components/styles'),
       images: path.resolve(__dirname, 'src/assets/images'),
     },
@@ -90,7 +87,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Output Management',
       inject: false,
-      chunks: ['app', 'reduxtest'],
+      chunks: ['app'],
       template: require('html-webpack-template'),
       appMountId: 'content'
     }),
