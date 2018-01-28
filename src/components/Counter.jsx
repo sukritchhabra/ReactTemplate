@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sampleIncrementAction, sampleDecrementAction } from 'state/sample';
+import SampleActions from 'state/sample';
 import 'styles/Counter.scss';
 
 // A basic counter component connected to the redux store.
@@ -31,8 +31,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    incValue: () => dispatch(sampleIncrementAction()),
-    decValue: () => dispatch(sampleDecrementAction()),
+    incValue: () => dispatch(SampleActions.sampleIncrementAction()),
+    decValue: () => dispatch(SampleActions.sampleDecrementAction()),
   };
 };
 
