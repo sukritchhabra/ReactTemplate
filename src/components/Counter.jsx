@@ -23,17 +23,13 @@ Counter.propTypes = {
   decValue: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = (state) => {
-  return {
-    value: selectValue(state),
-  };
-};
+const mapStateToProps = state => ({
+  value: selectValue(state),
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    incValue: () => dispatch(SampleActions.sampleIncrementAction()),
-    decValue: () => dispatch(SampleActions.sampleDecrementAction()),
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  incValue: () => dispatch(SampleActions.sampleIncrementAction()),
+  decValue: () => dispatch(SampleActions.sampleDecrementAction()),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

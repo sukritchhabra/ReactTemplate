@@ -5,8 +5,7 @@
   },
 
   "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
+    "airbnb"
   ],
 
   "parserOptions": {
@@ -27,5 +26,13 @@
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
     "semi": ["error", "always"]
+  },
+
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.config.js"
+      }
+    }
   }
 }

@@ -84,12 +84,12 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(['dist']),
-    new CopyWebpackPlugin([ {from:'./src/assets/images',to:'assets/images'} ]),
+    new CopyWebpackPlugin([{ from: './src/assets/images', to: 'assets/images' }]),
     new HtmlWebpackPlugin({
       title: 'Output Management',
       inject: false,
       chunks: ['app'],
-      template: require('html-webpack-template'),
+      template: require('html-webpack-template'), // eslint-disable-line
       appMountId: 'content'
     }),
     new ExtractTextPlugin('styles.css'),
