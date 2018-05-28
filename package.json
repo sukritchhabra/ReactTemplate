@@ -8,7 +8,10 @@
     "build": "webpack",
     "test": "jest",
     "lint": "eslint . --ext .js --ext .jsx || exit 0",
-    "lint:fix": "eslint --fix eslint --. --ext .js --ext .jsx || exit 0"
+    "lint:fix": "eslint --fix . --ext .js --ext .jsx || exit 0",
+    "lint:precommit": "eslint . --ext .js --ext .jsx",
+    "precommit": "npm run lint:precommit",
+    "prepush": "npm run lint:precommit && npm run test"
   },
   "jest": {
     "testEnvironment": "node",
