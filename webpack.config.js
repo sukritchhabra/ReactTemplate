@@ -7,7 +7,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
-const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /dist
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /docs
 
 module.exports = {
   entry: {
@@ -19,8 +19,8 @@ module.exports = {
 
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    path: path.resolve(__dirname, 'docs'),
+    publicPath: ''
   },
 
   module: {
@@ -76,14 +76,14 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: './dist',
+    contentBase: './docs',
     historyApiFallback: true,
     hot: true,
     overlay: true,
   },
 
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin(['docs']),
     new CopyWebpackPlugin([{ from: './src/assets/images', to: 'assets/images' }]),
     new HtmlWebpackPlugin({
       title: 'Output Management',

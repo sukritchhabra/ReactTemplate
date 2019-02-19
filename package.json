@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .js --ext .jsx || exit 0",
     "lint:fix": "eslint --fix . --ext .js --ext .jsx || exit 0",
     "lint:precommit": "eslint . --ext .js --ext .jsx",
-    "precommit": "npm run lint:precommit",
+    "precommit": "npm run build && git add ./docs* && npm run lint:precommit",
     "prepush": "npm run lint:precommit && npm run test"
   },
   "jest": {
