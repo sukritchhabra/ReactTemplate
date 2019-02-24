@@ -6,7 +6,8 @@
   "plugins": ["react-hot-loader/babel"],
   "env" : {
     "test": {
-      "presets": ["@babel/preset-env", "@babel/preset-react"]
+      "plugins": ["babel-plugin-webpack-alias"],
+      "presets": ["@babel/preset-env", "@babel/preset-react"],
     }
   }
 }
