@@ -26,7 +26,12 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "linebreak-style": ["error", "unix"],
     "quotes": ["error", "single"],
-    "semi": ["error", "always"]
+    "semi": ["error", "always"],
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": ["Link"],
+      "specialLink": ["to"],
+      "aspects": ["noHref", "invalidHref", "preferButton"]
+    }]
   },
 
   "settings": {
