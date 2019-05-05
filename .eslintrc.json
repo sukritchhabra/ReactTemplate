@@ -9,6 +9,8 @@
     "airbnb"
   ],
 
+  "parser": "babel-eslint",
+
   "parserOptions": {
     "ecmaFeatures": {
         "experimentalObjectRestSpread": true,
@@ -31,11 +33,15 @@
       "components": ["Link"],
       "specialLink": ["to"],
       "aspects": ["noHref", "invalidHref", "preferButton"]
-    }]
+    }],
+    "react/no-array-index-key": ["off"]
   },
 
   "settings": {
     "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      },
       "webpack": {
         "config": "webpack.config.js"
       }

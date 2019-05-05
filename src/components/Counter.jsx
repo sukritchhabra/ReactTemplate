@@ -15,8 +15,8 @@ const Counter = (props) => {
   return (
     <div className="counter">
       <h1 className="value">{value}</h1>
-      <button className="inc-button" onClick={incValue}>Increment</button>
-      <button className="dec-button" onClick={decValue}>Decrement</button>
+      <button type="button" className="inc-button" onClick={incValue}>Increment</button>
+      <button type="button" className="dec-button" onClick={decValue}>Decrement</button>
     </div>
   );
 };
