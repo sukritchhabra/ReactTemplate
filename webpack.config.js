@@ -5,13 +5,58 @@ const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin'); // Copy assets to /docs
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpack = require('webpack');
 
 const { NODE_ENV } = process.env;
 const IS_PROD = NODE_ENV === 'production';
 const IS_DEV = NODE_ENV === 'development';
+// const IS_GITHUB = NODE_ENV === 'github';
+
+const ENV_DATA_MAP = {
+  production: {
+    indexFilename: '../index.html',
+    cleanPath: 'dist',
+    devServer: {
+      contentBase: './dist/',
+    },
+
+    output: {
+      publicPath: './dist/',
+      path: 'dist',
+    },
+  },
+
+  development: {
+    indexFilename: '../index.html',
+    cleanPath: 'dist',
+    devServer: {
+      contentBase: './dist',
+    },
+
+    output: {
+      publicPath: '/',
+      path: '/',
+    },
+  },
+
+  github: {
+    indexFilename: '../index.html',
+    cleanPath: 'docs',
+    devServer: {
+      contentBase: './docs/',
+    },
+
+    output: {
+      publicPath: './docs/',
+      path: 'docs',
+    },
+  },
+};
+
+const DERIVED_ENV = (NODE_ENV && ENV_DATA_MAP[NODE_ENV]) ? NODE_ENV : 'production';
+const ENV_DATA = { ...ENV_DATA_MAP[DERIVED_ENV] };
 
 module.exports = {
   entry: {
@@ -23,8 +68,8 @@ module.exports = {
 
   output: {
     filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'docs'),
-    publicPath: ''
+    path: path.resolve(__dirname, ENV_DATA.output.path),
+    publicPath: ENV_DATA.output.publicPath,
   },
 
   module: {
@@ -67,6 +112,18 @@ module.exports = {
             },
           }
         ]
+      },
+      {
+        test: /\.(pdf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8000,
+              name: 'files/[hash]-[name].[ext]'
+            }
+          },
+        ]
       }
     ]
   },
@@ -77,23 +134,26 @@ module.exports = {
       state: path.resolve(__dirname, 'src/state'),
       styles: path.resolve(__dirname, 'src/components/styles'),
       utils: path.resolve(__dirname, 'src/utils'),
+      data: path.resolve(__dirname, 'src/data'),
       images: path.resolve(__dirname, 'src/assets/images'),
+      files: path.resolve(__dirname, 'src/assets/files'),
     },
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.svg', '.png', '.jpg', '.pdf']
   },
 
   devServer: {
-    contentBase: './docs',
+    contentBase: ENV_DATA.output.publicPath,
     historyApiFallback: true,
     hot: true,
     overlay: true,
   },
 
   plugins: [
-    new CleanWebpackPlugin(['docs']),
+    new CleanWebpackPlugin([ENV_DATA.cleanPath]),
     new CopyWebpackPlugin([{ from: './src/assets/images', to: 'assets/images' }]),
     new HtmlWebpackPlugin({
       title: 'ReactTemplate',
+      filename: ENV_DATA.indexFilename,
       inject: false,
       chunks: ['app'],
       template: require('html-webpack-template'), // eslint-disable-line
@@ -107,7 +167,7 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.DefinePlugin({
       APP_CONFIG: {
-        ENV: JSON.stringify(process.env.NODE_ENV),
+        ENV: JSON.stringify(DERIVED_ENV),
         PROD: JSON.stringify('production'),
         DEV: JSON.stringify('development'),
         IS_PROD: JSON.stringify(IS_PROD),

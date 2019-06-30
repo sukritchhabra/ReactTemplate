@@ -1,17 +1,19 @@
 {
-  "name": "ReactTemplate",
+  "name": "SukritChhabra",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "NODE_ENV=development webpack-dev-server --open",
-    "build": "NODE_ENV=production webpack",
-    "build:github": "npm run build && git add ./docs*",
+    "build": "webpack",
+    "build:add": "npm run build && git add ./dist*",
+    "build:prod": "NODE_ENV=production npm run build:add",
+    "build:github": "NODE_ENV=github npm run build:add",
     "test": "NODE_ENV=test jest",
     "lint": "eslint . --ext .js --ext .jsx || exit 0",
     "lint:fix": "eslint --fix . --ext .js --ext .jsx || exit 0",
     "lint:precommit": "eslint . --ext .js --ext .jsx",
-    "precommit": "npm run build:github && npm run lint:precommit",
+    "precommit": "npm run build:prod && npm run lint:precommit",
     "prepush": "npm run lint:precommit && npm run test"
   },
   "jest": {
