@@ -67,7 +67,7 @@ module.exports = {
   },
 
   output: {
-    filename: '[name].bundle.js',
+    filename: '[name].bundle.[hash].js',
     path: path.resolve(__dirname, ENV_DATA.output.path),
     publicPath: ENV_DATA.output.publicPath,
   },
@@ -108,6 +108,20 @@ module.exports = {
               webp: {
                 quality: 60,
                 lossless: true,
+              },
+
+              mozjpeg: {
+                progressive: true,
+                quality: 85
+              },
+
+              optipng: {
+                enabled: false,
+              },
+
+              pngquant: {
+                quality: '65-75',
+                speed: 4
               }
             },
           }
@@ -155,7 +169,7 @@ module.exports = {
       title: 'ReactTemplate',
       filename: ENV_DATA.indexFilename,
       inject: false,
-      chunks: ['app'],
+      chunks: ['vendor', 'app'],
       template: require('html-webpack-template'), // eslint-disable-line
       appMountId: 'content',
       meta: [
@@ -177,5 +191,16 @@ module.exports = {
     new Dotenv({
       path: './.env',
     }),
-  ]
+  ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    },
+  },
 };
