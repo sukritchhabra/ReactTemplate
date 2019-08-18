@@ -34,7 +34,9 @@
       "specialLink": ["to"],
       "aspects": ["noHref", "invalidHref", "preferButton"]
     }],
-    "react/no-array-index-key": ["off"]
+    "react/no-array-index-key": ["off"],
+    "react/jsx-one-expression-per-line": ["off"],
+    "implicit-arrow-linebreak": ["off"]
   },
 
   "settings": {

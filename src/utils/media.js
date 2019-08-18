@@ -14,5 +14,11 @@ export const media = Object.keys(sizes).reduce((acc, label) => {
     }
   `;
 
+  acc.min[label] = (...args) => css`
+    @media (min-width: ${sizes[label] / 16}em) {
+      ${css(...args)}
+    }
+  `;
+
   return acc;
-}, {});
+}, { min: {} });
