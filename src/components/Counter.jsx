@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SampleActions, { selectValue } from 'state/sample';
+import { Button } from 'components/base/buttons';
 import 'styles/Counter.scss';
 
 // A basic counter component connected to the redux store.
@@ -15,8 +16,8 @@ const Counter = (props) => {
   return (
     <div className="counter">
       <h1 className="value">{value}</h1>
-      <button type="button" className="inc-button" onClick={incValue}>Increment</button>
-      <button type="button" className="dec-button" onClick={decValue}>Decrement</button>
+      <Button onClick={incValue}>Increment</Button>
+      <Button onClick={decValue}>Decrement</Button>
     </div>
   );
 };

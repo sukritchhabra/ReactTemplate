@@ -101,15 +101,6 @@ module.exports = {
               limit: 8000,
               name: 'images/[hash]-[name].[ext]'
             }
-          },
-          {
-            loader: 'image-webpack-loader',
-            options: {
-              webp: {
-                quality: 60,
-                lossless: true,
-              }
-            },
           }
         ]
       },
@@ -123,6 +114,29 @@ module.exports = {
               name: 'files/[hash]-[name].[ext]'
             }
           },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              // webp: {
+              //   quality: 60,
+              //   lossless: true,
+              // },
+
+              mozjpeg: {
+                progressive: true,
+                quality: 85
+              },
+
+              optipng: {
+                enabled: false,
+              },
+
+              pngquant: {
+                quality: '65-75',
+                speed: 4
+              }
+            },
+          }
         ]
       }
     ]
