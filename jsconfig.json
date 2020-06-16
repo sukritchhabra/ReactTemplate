@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "src/*": ["./src/*"],
+      "components/*": ["./src/components/*"],
+      "sagas/*": ["./src/sagas/*"],
+      "state/*": ["./src/state/*"],
+      "styles/*": ["./src/components/styles/*"],
+      "utils/*": ["./src/utils/*"],
+      "data/*": ["./src/data/*"],
+      "images/*": ["./src/assets/images/*"],
+      "files/*": ["./src/assets/files/*" ]
+    },
+  },
+  "exclude": ["node_modules"],
+}

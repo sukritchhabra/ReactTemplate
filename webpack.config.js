@@ -1,4 +1,4 @@
-/* global require, module, __dirname */
+// /* global require, module, __dirname */
 
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
@@ -101,18 +101,6 @@ module.exports = {
               limit: 8000,
               name: 'images/[hash]-[name].[ext]'
             }
-          }
-        ]
-      },
-      {
-        test: /\.(pdf)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8000,
-              name: 'files/[hash]-[name].[ext]'
-            }
           },
           {
             loader: 'image-webpack-loader',
@@ -138,12 +126,25 @@ module.exports = {
             },
           }
         ]
+      },
+      {
+        test: /\.(pdf)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 8000,
+              name: 'files/[hash]-[name].[ext]'
+            }
+          },
+        ]
       }
     ]
   },
 
   resolve: {
     alias: {
+      src: path.resolve(__dirname, 'src'),
       components: path.resolve(__dirname, 'src/components'),
       state: path.resolve(__dirname, 'src/state'),
       styles: path.resolve(__dirname, 'src/components/styles'),
