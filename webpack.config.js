@@ -4,7 +4,7 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const webpack = require('webpack');
@@ -98,6 +98,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
+              fallback: require.resolve('file-loader'),
               limit: 8000,
               name: 'images/[hash]-[name].[ext]'
             }
@@ -164,12 +165,12 @@ module.exports = {
   },
 
   plugins: [
-    new CleanWebpackPlugin([ENV_DATA.cleanPath]),
-    new CopyWebpackPlugin([{ from: './src/assets/images', to: 'assets/images' }]),
+    new CleanWebpackPlugin({ cleanOnceBeforeBuildPatterns: [ENV_DATA.cleanPath] }),
+    new CopyWebpackPlugin({ patterns: [{ from: './src/assets/images', to: 'assets/images' }] }),
     new HtmlWebpackPlugin({
       title: 'ReactTemplate',
       filename: ENV_DATA.indexFilename,
-      inject: false,
+      inject: true,
       chunks: ['app'],
       template: require('html-webpack-template'), // eslint-disable-line
       appMountId: 'content',
